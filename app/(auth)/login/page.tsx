@@ -1,9 +1,9 @@
-const Adminlogin = () => {
-  return (
-    <div>
-      <h1>ini adalah halaman Login</h1>
-    </div>
-  );
+import Login from "./_components/login";
+
+export const metadata = {
+  title: "Nadhifa Juice Login",
 };
 
-export default Adminlogin;
+export default function LoginPage() {
+  return <Login />;
+}
