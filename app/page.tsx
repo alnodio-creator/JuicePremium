@@ -1,17 +1,18 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import Navbar from '@/components/Navbar'
-import Footer from '@/components/Footer'
-import FilterPanel from '@/components/FilterPanel'
-import ProductCatalog from '@/components/ProductCatalog'
-import ProductDetailModal from '@/components/ProductDetailModal'
-import HealthRecommendations from '@/components/HealthRecommendations'
-import { useProductFilter } from '@/hooks/useProductFilter'
-import { Product } from '@/lib/types'
-import { CTA_TEXT, SITE_NAME, SITE_TAGLINE } from '@/lib/constants'
-import { ArrowRight, Zap } from 'lucide-react'
+import { useState } from "react";
+import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import FilterPanel from "@/components/FilterPanel";
+import ProductCatalog from "@/components/ProductCatalog";
+import ProductDetailModal from "@/components/ProductDetailModal";
+import HealthRecommendations from "@/components/HealthRecommendations";
+import { useProductFilter } from "@/hooks/useProductFilter";
+import { Product } from "@/lib/types";
+import { CTA_TEXT, SITE_NAME, SITE_TAGLINE } from "@/lib/constants";
+import { ArrowRight, Zap } from "lucide-react";
+import { ModeToggle } from "@/components/Commons/Dark-mode";
 
 export default function Home() {
   const {
@@ -22,28 +23,31 @@ export default function Home() {
     setSelectedIngredients,
     setSelectedHealthGoals,
     resetFilters,
-  } = useProductFilter()
+  } = useProductFilter();
 
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleViewDetails = (product: Product) => {
-    setSelectedProduct(product)
-    setIsModalOpen(true)
-  }
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
 
   const handleHealthGoalSelect = (goals: string[]) => {
-    setSelectedHealthGoals(goals)
+    setSelectedHealthGoals(goals);
     // Scroll to products
-    const element = document.getElementById('products-section')
-    element?.scrollIntoView({ behavior: 'smooth' })
-  }
+    const element = document.getElementById("products-section");
+    element?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <main className="min-h-screen bg-background">
       {/* Debugging */}
-      <div className='fixed top-0 left-0 w-full z-50 bg-white shadow-md'>
-      <Navbar onSearchChange={setSearchQuery} />
+      <div className="relative top-0 left-0 w-full z-50 bg-white shadow-md">
+        <Navbar onSearchChange={setSearchQuery} />
+        <div className="absolute right-7 top-4 z-100 border-4 border-blue-900 border-r-accent">
+          <ModeToggle />
+        </div>
       </div>
 
       {/* Hero Section */}
@@ -52,18 +56,20 @@ export default function Home() {
         <div className="absolute inset-0 pointer-events-none">
           <motion.div
             animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
             className="absolute top-20 right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl"
           />
           <motion.div
             animate={{ rotate: -360 }}
-            transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
             className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
           />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl">
-          <h1 className='bg-black text-white rounded-4xl'>Ini bagian MAIN PAGE</h1>
+          <h1 className="bg-black text-white rounded-4xl">
+            Ini bagian MAIN PAGE
+          </h1>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -88,10 +94,10 @@ export default function Home() {
               transition={{ delay: 0.2 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground text-balance leading-tight"
             >
-              Tingkatkan Kesehatanmu dengan {' '}
+              Tingkatkan Kesehatanmu dengan{" "}
               <motion.span
                 className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent"
-                animate={{ backgroundPosition: ['0%', '100%', '0%'] }}
+                animate={{ backgroundPosition: ["0%", "100%", "0%"] }}
                 transition={{ duration: 3, repeat: Infinity }}
               >
                 Kesegaran Alami
@@ -105,7 +111,8 @@ export default function Home() {
               transition={{ delay: 0.3 }}
               className="text-xl text-muted-foreground max-w-2xl mx-auto"
             >
-              Rasakan kesegaran jus cold-pressed premium dengan bahan alami terbaik untuk menemani hidup sehat setiap hari.
+              Rasakan kesegaran jus cold-pressed premium dengan bahan alami
+              terbaik untuk menemani hidup sehat setiap hari.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -119,8 +126,8 @@ export default function Home() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => {
-                  const element = document.getElementById('products-section')
-                  element?.scrollIntoView({ behavior: 'smooth' })
+                  const element = document.getElementById("products-section");
+                  element?.scrollIntoView({ behavior: "smooth" });
                 }}
                 className="flex items-center gap-2 px-8 py-3 rounded-lg bg-linear-to-r from-primary to-accent text-white font-semibold hover:shadow-lg transition-all shadow-md"
               >
@@ -145,17 +152,21 @@ export default function Home() {
             className="grid grid-cols-3 gap-4 sm:gap-8 max-w-2xl mx-auto"
           >
             {[
-              { number: '12+', label: 'Premium Blends' },
-              { number: '100%', label: 'Natural' },
-              { number: '4.7★', label: 'Customer Rated' },
+              { number: "12+", label: "Premium Blends" },
+              { number: "100%", label: "Natural" },
+              { number: "4.7★", label: "Customer Rated" },
             ].map((stat, i) => (
               <motion.div
                 key={i}
                 whileHover={{ y: -4 }}
                 className="text-center glass rounded-lg p-4"
               >
-                <p className="text-2xl sm:text-3xl font-bold text-primary">{stat.number}</p>
-                <p className="text-xs sm:text-sm text-muted-foreground">{stat.label}</p>
+                <p className="text-2xl sm:text-3xl font-bold text-primary">
+                  {stat.number}
+                </p>
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  {stat.label}
+                </p>
               </motion.div>
             ))}
           </motion.div>
@@ -170,7 +181,10 @@ export default function Home() {
       </section>
 
       {/* Products Section */}
-      <section id="products-section" className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <section
+        id="products-section"
+        className="px-4 sm:px-6 lg:px-8 py-16 sm:py-20"
+      >
         <div className="mx-auto max-w-7xl">
           <motion.div
             initial={{ opacity: 0 }}
@@ -182,14 +196,15 @@ export default function Home() {
               Our Premium Collection
             </h2>
             <p className="text-lg text-muted-foreground">
-              Filter by category, ingredients, or health goals to find your perfect juice
+              Filter by category, ingredients, or health goals to find your
+              perfect juice
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* Sidebar Filter */}
             <div className="lg:col-span-1">
-              <h1 className='bg-blue-500'>Ini filter panel</h1>
+              <h1 className="bg-blue-500">Ini filter panel</h1>
               <FilterPanel
                 filters={filters}
                 onCategoryChange={setSelectedCategory}
@@ -201,7 +216,7 @@ export default function Home() {
 
             {/* Products Grid */}
             <div className="lg:col-span-3">
-              <h1 className='bg-blue-500 '>Ini product Catalog</h1>
+              <h1 className="bg-blue-500 ">Ini product Catalog</h1>
               <ProductCatalog
                 products={filteredProducts}
                 onViewDetails={handleViewDetails}
@@ -212,7 +227,9 @@ export default function Home() {
       </section>
 
       {/* Product Detail Modal */}
-      <h1 className='bg-black text-white rounded-4xl'>Ini product detail modal</h1>
+      <h1 className="bg-black text-white rounded-4xl">
+        Ini product detail modal
+      </h1>
       <ProductDetailModal
         product={selectedProduct}
         isOpen={isModalOpen}
@@ -222,5 +239,5 @@ export default function Home() {
       {/* Footer */}
       <Footer />
     </main>
-  )
+  );
 }

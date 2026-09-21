@@ -1,25 +1,25 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Search, Menu, X, ShoppingCart } from 'lucide-react'
-import { SITE_NAME, CTA_TEXT } from '@/lib/constants'
-import { motion } from 'framer-motion'
+import { useState } from "react";
+import { Search, Menu, X, ShoppingCart } from "lucide-react";
+import { SITE_NAME, CTA_TEXT } from "@/lib/constants";
+import { motion } from "framer-motion";
 
 interface NavbarProps {
-  onSearchChange: (query: string) => void
-  itemCount?: number
+  onSearchChange: (query: string) => void;
+  itemCount?: number;
 }
 
 export default function Navbar({ onSearchChange, itemCount = 0 }: NavbarProps) {
-  const [isSearchFocused, setIsSearchFocused] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const [searchValue, setSearchValue] = useState('')
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value
-    setSearchValue(value)
-    onSearchChange(value)
-  }
+    const value = e.target.value;
+    setSearchValue(value);
+    onSearchChange(value);
+  };
 
   return (
     <motion.header
@@ -33,7 +33,7 @@ export default function Navbar({ onSearchChange, itemCount = 0 }: NavbarProps) {
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.90 }}
+            whileTap={{ scale: 0.9 }}
             className="flex items-center gap-2"
           >
             <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center text-white font-bold text-lg">
@@ -105,7 +105,7 @@ export default function Navbar({ onSearchChange, itemCount = 0 }: NavbarProps) {
         {/* Mobile Search */}
         <motion.div
           initial={false}
-          animate={{ height: isMobileMenuOpen ? 'auto' : 0 }}
+          animate={{ height: isMobileMenuOpen ? "auto" : 0 }}
           transition={{ duration: 0.3 }}
           className="overflow-hidden md:hidden"
         >
@@ -140,5 +140,5 @@ export default function Navbar({ onSearchChange, itemCount = 0 }: NavbarProps) {
         </motion.div>
       </nav>
     </motion.header>
-  )
+  );
 }

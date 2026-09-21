@@ -6,6 +6,23 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-}
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "10mb",
+    },
+  },
+  devIndicators: false,
+  images: {
+    domains: ["https://skblyqggxygsakugtopw.supabase.co"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "skblyqggxygsakugtopw.supabase.co",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
+};
 
-export default nextConfig
+export default nextConfig;
