@@ -1,52 +1,16 @@
 "use client";
-import useDataTable from "@/hooks/use-data-table";
-import { createClient } from "@/lib/supabase/client";
-import { useQuery } from "@tanstack/react-query";
-import { use } from "react";
-import { toast } from "sonner";
 
-export default function DashboardProudct({
-  params,
-}: {
-  params: Promise<{ id: number }>;
-}) {
+import { use } from "react";
+import DashboardProduct from "./_components/dashboard-product";
+
+export default function Page({ params }: { params: Promise<{ id: number }> }) {
   const { id } = use(params);
 
-  const supabase = createClient();
-
-  const {
-    currentPage,
-    handleChangePage,
-    currentLimit,
-    handleChangeLimit,
-    currentSearch,
-    handleChangeSearch,
-  } = useDataTable();
-
-  const getDataProductType = async () => {
-    const AmbilDataProduk = await supabase
-      .from("products")
-      .select("*", { count: "exact" })
-      .range((currentPage - 1) * currentLimit, currentLimit * currentPage - 1)
-      .eq("id", id)
-      .order("id")
-      .ilike("name", `%${currentSearch}%`);
-
-    if (AmbilDataProduk.error) {
-      toast.error("Gagal Menarik data dari Database", {
-        description: AmbilDataProduk?.error.message ?? "error",
-      });
-    }
-
-    return AmbilDataProduk;
-  };
-
-  const { data: Product, refetch } = useQuery({
-    queryKey: ["product", currentLimit, currentPage, currentSearch],
-    queryFn: getDataProductType,
-  });
-
-  console.log(Product);
-
-  return <div>{id}</div>;
+  return (
+    <main className="min-h-screen w-full bg-background">
+      <div className="mx-auto w-full max-w-[1800px] px-4 py-6 sm:px-6 lg:px-8">
+        <DashboardProduct id={id} />
+      </div>
+    </main>
+  );
 }

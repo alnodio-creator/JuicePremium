@@ -124,7 +124,7 @@ export default function CardTypeProduct({ item }: { item: UpdateTypeProduct }) {
                 </div>
 
                 <Link
-                  href={`/dashboard/dashboard-product/${item.id}`}
+                  href={`/admin/dashboard/dashboard-product/${item.id}`}
                   className="
                     flex w-full items-center justify-center gap-2
                     rounded-md bg-primary px-4 py-2
@@ -141,7 +141,7 @@ export default function CardTypeProduct({ item }: { item: UpdateTypeProduct }) {
 
           {/* Direct link */}
           <Link
-            href={`/dashboard/dashboard-product/${item.id}`}
+            href={`/admin/dashboard/dashboard-product/${item.id}`}
             className="
               flex h-8 w-8 items-center justify-center
               rounded-full bg-white/90
@@ -158,7 +158,7 @@ export default function CardTypeProduct({ item }: { item: UpdateTypeProduct }) {
       <CardHeader className="px-4 pb-2 pt-4">
         <CardTitle className="line-clamp-2 min-h-10 text-base font-semibold leading-5">
           <Link
-            href={`/dashboard/dashboard-product/${item.id}`}
+            href={`/admin/dashboard/dashboard-product/${item.id}`}
             className="transition-colors hover:text-primary"
           >
             {item.name || "Tanpa Nama"}
