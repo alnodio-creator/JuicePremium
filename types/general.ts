@@ -22,6 +22,6 @@ export type UpdateTypeProduct = {
   id: number;
   name: string;
   description: string;
-  Prod_Type_Image: string | File;
+  Prod_Type_Image: string;
   disabled?: boolean;
 };

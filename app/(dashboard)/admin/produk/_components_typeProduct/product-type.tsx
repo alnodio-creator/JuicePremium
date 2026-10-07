@@ -38,6 +38,7 @@ import CreateProductType from "./dialog-create-type";
 import { UpdateTypeProduct } from "@/types/general";
 import { UpdateProductType } from "./dialog-update-type";
 import { DeletedProductType } from "./dialog-delete-type";
+import Link from "next/link";
 
 export default function ProductDashboard() {
   const {
@@ -123,7 +124,9 @@ export default function ProductDashboard() {
             >
               <CardHeader>
                 <CardTitle className="min-h-14 text-center">
-                  {item.name}
+                  <Link href={`dashboard/dashboard-product/${item.id}`}>
+                    {item.name}
+                  </Link>
                 </CardTitle>
                 <CardDescription className="flex font-bold items-center gap-2">
                   <Ratio className="h-4 w-4 text-orange-500" />

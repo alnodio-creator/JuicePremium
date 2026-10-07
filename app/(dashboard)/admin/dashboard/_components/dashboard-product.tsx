@@ -36,7 +36,7 @@ import { DialogTrigger } from "@/components/ui/dialog";
 import CreateProductType from "../../produk/_components_typeProduct/dialog-create-type";
 import Link from "next/link";
 
-export default function ProductDashboard() {
+export default function ProductDashboard({ id }: { id: number }) {
   const {
     currentPage,
     handleChangePage,
@@ -49,8 +49,9 @@ export default function ProductDashboard() {
 
   const getDataProductType = async () => {
     const query = await supabase
-      .from("product_types")
+      .from("products")
       .select("*", { count: "exact" })
+      .eq("product_type_id", id)
       .range((currentPage - 1) * currentLimit, currentPage * currentLimit - 1)
       .order("id")
       .ilike("name", `%${currentSearch}%`);
@@ -77,6 +78,7 @@ export default function ProductDashboard() {
   const filteredData = useMemo(() => {
     return ProductTypes?.data ?? [];
   }, [ProductTypes]);
+
   console.log(filteredData);
 
   const TotalPages = useMemo(() => {

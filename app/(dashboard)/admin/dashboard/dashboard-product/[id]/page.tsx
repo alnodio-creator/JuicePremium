@@ -46,5 +46,7 @@ export default function DashboardProudct({
     queryFn: getDataProductType,
   });
 
+  console.log(Product);
+
   return <div>{id}</div>;
 }
