@@ -21,7 +21,7 @@ export type updateProductJuice = {
 export type UpdateTypeProduct = {
   id: number;
   name: string;
-  description: string;
-  Prod_Type_Image: string;
+  description: string | null;
+  Prod_Type_Image: string | null;
   disabled?: boolean;
 };

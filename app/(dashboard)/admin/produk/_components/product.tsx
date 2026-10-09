@@ -70,29 +70,51 @@ export default function ProductManagement() {
   const filteredData = useMemo(() => {
     return (users?.data || []).map((result, index) => {
       return [
+        // No
         currentLimit * (currentPage - 1) + index + 1,
-        <div>
+
+        // Image
+        <div className="w-24 flex justify-center">
           <Image
             src={result.image}
             alt={result.name}
-            width={100}
-            height={100}
+            width={70}
+            height={70}
+            className="h-16 w-16 rounded-lg object-cover"
           />
         </div>,
-        result.name,
-        result.category,
-        result.price,
-        <div className="max-w-xs">
-          <p className="text-sm text-gray-500 wrap-break-word whitespace-normal">
-            {result.description}
+
+        // Name
+        <div className="min-w-[150px] max-w-[200px] font-medium">
+          <p className="truncate" title={result.name}>
+            {result.name}
           </p>
         </div>,
+
+        // Category
+        <div className="min-w-[100px] max-w-[130px]">{result.category}</div>,
+
+        // Price
+        <div className="min-w-[100px] whitespace-nowrap">
+          Rp {result.price.toLocaleString("id-ID")}
+        </div>,
+
+        // Description
+        <div className="w-[280px] max-w-[280px]">
+          <div className="h-16 overflow-y-auto overflow-x-hidden pr-2">
+            <p className="text-sm text-gray-500 break-words whitespace-normal">
+              {result.description || "-"}
+            </p>
+          </div>
+        </div>,
+
+        // Action
         <DropdownAction
           menu={[
             {
               label: (
-                <span className="flex item-center gap-2">
-                  <Pencil />
+                <span className="flex items-center gap-2">
+                  <Pencil className="h-4 w-4" />
                   Edit
                 </span>
               ),
@@ -105,8 +127,8 @@ export default function ProductManagement() {
             },
             {
               label: (
-                <span className="flex item-center gap-2">
-                  <Trash2 className="text-red-400" />
+                <span className="flex items-center gap-2">
+                  <Trash2 className="h-4 w-4 text-red-400" />
                   Delete
                 </span>
               ),
@@ -122,13 +144,15 @@ export default function ProductManagement() {
         />,
       ];
     });
-  }, [users]);
+  }, [users, currentLimit, currentPage]);
 
   const totalPages = useMemo(() => {
     return users && users.count !== null
       ? Math.ceil(users.count / currentLimit)
       : 0;
   }, [users]);
+
+  console.log(users?.count);
 
   return (
     <div className="w-full">

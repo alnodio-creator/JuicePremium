@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -16,25 +10,27 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { UpdateTypeProduct } from "@/types/general";
-import { ArrowUpRight, Package, Ratio, Eye } from "lucide-react";
+import { ArrowUpRight, Eye, Package, Ratio, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function CardTypeProduct({ item }: { item: UpdateTypeProduct }) {
   return (
     <Card
-      key={item.id}
       className="
         group flex h-full flex-col overflow-hidden
-        border-border/60 bg-card
-        shadow-sm transition-all duration-300
+        rounded-2xl border-border/60 bg-card
+        shadow-sm
+        transition-all duration-300
         hover:-translate-y-1
         hover:border-primary/30
-        hover:shadow-lg
+        hover:shadow-xl
       "
     >
-      {/* Image */}
-      <div className="relative h-40 w-full overflow-hidden bg-muted sm:h-44">
+      {/* =====================================================
+          IMAGE
+      ====================================================== */}
+      <div className="relative h-48 w-full overflow-hidden bg-muted">
         {item.Prod_Type_Image ? (
           <Image
             src={item.Prod_Type_Image}
@@ -48,45 +44,80 @@ export default function CardTypeProduct({ item }: { item: UpdateTypeProduct }) {
             "
             className="
               object-cover
-              transition-transform duration-500
+              transition-transform duration-700
               group-hover:scale-105
             "
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-primary/10 via-muted to-primary/5">
-            <Package className="h-12 w-12 text-muted-foreground/30" />
+          <div
+            className="
+              flex h-full w-full items-center justify-center
+              bg-linear-to-br from-primary/10
+              via-muted to-primary/5
+            "
+          >
+            <Package className="h-16 w-16 text-muted-foreground/25" />
           </div>
         )}
 
-        <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent" />
+        {/* Image overlay */}
+        <div
+          className="
+            absolute inset-0
+            bg-linear-to-t
+            from-black/70 via-black/10 to-transparent
+          "
+        />
 
-        {/* Badge */}
+        {/* =====================================================
+            TOP BADGE
+        ====================================================== */}
         <div className="absolute left-3 top-3">
-          <div className="flex items-center gap-1.5 rounded-full border border-white/20 bg-black/40 px-2.5 py-1 text-[11px] font-medium text-white backdrop-blur-md">
+          <div
+            className="
+              flex items-center gap-1.5
+              rounded-full
+              border border-white/20
+              bg-black/40
+              px-3 py-1.5
+              text-[11px] font-medium
+              text-white
+              backdrop-blur-md
+            "
+          >
             <Ratio className="h-3 w-3" />
             Product Type
           </div>
         </div>
 
-        {/* Action */}
+        {/* =====================================================
+            ACTION BUTTONS
+        ====================================================== */}
         <div
           className="
             absolute bottom-3 right-3
             flex items-center gap-2
-            opacity-0 transition-all duration-300
+            opacity-0
+            translate-y-2
+            transition-all duration-300
+            group-hover:translate-y-0
             group-hover:opacity-100
           "
         >
-          {/* tombol Dialog */}
+          {/* View Dialog */}
           <Dialog>
             <DialogTrigger asChild>
               <button
                 type="button"
+                aria-label="Lihat detail"
                 className="
-                  flex h-8 w-8 items-center justify-center
-                  rounded-full bg-white/90
-                  text-gray-900 shadow-lg
-                  transition-colors
+                  flex h-9 w-9 items-center justify-center
+                  rounded-full
+                  bg-white/95
+                  text-gray-900
+                  shadow-lg
+                  transition-all
+                  hover:scale-105
                   hover:bg-white
                 "
               >
@@ -103,9 +134,10 @@ export default function CardTypeProduct({ item }: { item: UpdateTypeProduct }) {
                 </DialogDescription>
               </DialogHeader>
 
-              <div className="space-y-4">
+              <div className="space-y-5">
+                {/* Image */}
                 {item.Prod_Type_Image && (
-                  <div className="relative h-48 w-full overflow-hidden rounded-lg">
+                  <div className="relative h-56 w-full overflow-hidden rounded-xl">
                     <Image
                       src={item.Prod_Type_Image}
                       alt={item.name || "Product Type"}
@@ -115,21 +147,54 @@ export default function CardTypeProduct({ item }: { item: UpdateTypeProduct }) {
                   </div>
                 )}
 
-                <div className="rounded-lg bg-muted/50 p-4">
-                  <p className="mb-1 text-sm font-medium">Deskripsi</p>
+                {/* Description */}
+                <div className="rounded-xl bg-muted/50 p-4">
+                  <div className="mb-2 flex items-center gap-2">
+                    <div
+                      className="
+                        flex h-7 w-7 items-center justify-center
+                        rounded-lg bg-primary/10
+                      "
+                    >
+                      <Sparkles className="h-3.5 w-3.5 text-primary" />
+                    </div>
+
+                    <p className="text-sm font-semibold">Deskripsi</p>
+                  </div>
 
                   <p className="text-sm leading-6 text-muted-foreground">
-                    {item.description || "Belum ada deskripsi produk."}
+                    {item.description ||
+                      "Belum ada deskripsi untuk product type ini."}
                   </p>
                 </div>
 
+                {/* Product Type Info */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-xl border bg-card p-3">
+                    <p className="text-xs text-muted-foreground">Tipe</p>
+
+                    <p className="mt-1 text-sm font-semibold">Product Type</p>
+                  </div>
+
+                  <div className="rounded-xl border bg-card p-3">
+                    <p className="text-xs text-muted-foreground">ID</p>
+
+                    <p className="mt-1 text-sm font-semibold">#{item.id}</p>
+                  </div>
+                </div>
+
+                {/* Detail Button */}
                 <Link
                   href={`/admin/dashboard/dashboard-product/${item.id}`}
                   className="
-                    flex w-full items-center justify-center gap-2
-                    rounded-md bg-primary px-4 py-2
-                    text-sm font-medium text-primary-foreground
+                    flex w-full items-center justify-center
+                    gap-2 rounded-xl
+                    bg-primary px-4 py-2.5
+                    text-sm font-semibold
+                    text-primary-foreground
+                    transition-all
                     hover:bg-primary/90
+                    hover:shadow-md
                   "
                 >
                   Buka Detail
@@ -139,48 +204,123 @@ export default function CardTypeProduct({ item }: { item: UpdateTypeProduct }) {
             </DialogContent>
           </Dialog>
 
-          {/* Direct link */}
+          {/* Direct Link */}
           <Link
             href={`/admin/dashboard/dashboard-product/${item.id}`}
+            aria-label="Buka detail"
             className="
-              flex h-8 w-8 items-center justify-center
-              rounded-full bg-white/90
-              text-gray-900 shadow-lg
+              flex h-9 w-9 items-center justify-center
+              rounded-full
+              bg-white/95
+              text-gray-900
+              shadow-lg
+              transition-all
+              hover:scale-105
               hover:bg-white
             "
           >
             <ArrowUpRight className="h-4 w-4" />
           </Link>
         </div>
+
+        {/* =====================================================
+            IMAGE BOTTOM TITLE
+        ====================================================== */}
+        <div className="absolute bottom-3 left-3 right-20">
+          <p className="line-clamp-2 text-base font-semibold leading-5 text-white drop-shadow-md">
+            {item.name || "Tanpa Nama"}
+          </p>
+        </div>
       </div>
 
-      {/* Header */}
+      {/* =====================================================
+          CONTENT
+      ====================================================== */}
       <CardHeader className="px-4 pb-2 pt-4">
-        <CardTitle className="line-clamp-2 min-h-10 text-base font-semibold leading-5">
+        <div className="flex items-center justify-between">
+          {/* Type */}
+          <div className="flex items-center gap-2">
+            <div
+              className="
+                flex h-7 w-7 items-center justify-center
+                rounded-lg bg-primary/10
+              "
+            >
+              <Ratio className="h-3.5 w-3.5 text-primary" />
+            </div>
+
+            <span className="text-xs font-medium text-muted-foreground">
+              Product Type
+            </span>
+          </div>
+
+          {/* ID */}
+          <span className="text-[11px] text-muted-foreground">#{item.id}</span>
+        </div>
+
+        {/* Desktop title */}
+        <CardTitle className="pt-2 text-base font-semibold leading-5">
           <Link
             href={`/admin/dashboard/dashboard-product/${item.id}`}
-            className="transition-colors hover:text-primary"
+            className="
+              line-clamp-2
+              transition-colors
+              hover:text-primary
+            "
           >
             {item.name || "Tanpa Nama"}
           </Link>
         </CardTitle>
-
-        <CardDescription className="flex items-center gap-2 text-xs">
-          <div className="flex h-5 w-5 items-center justify-center rounded-md bg-primary/10">
-            <Ratio className="h-3 w-3 text-primary" />
-          </div>
-
-          <span>Product Type</span>
-        </CardDescription>
       </CardHeader>
 
-      {/* Description */}
+      {/* =====================================================
+          DESCRIPTION
+      ====================================================== */}
       <CardContent className="flex flex-1 flex-col px-4 pb-4">
-        <div className="rounded-lg bg-muted/40 p-2.5">
-          <p className="line-clamp-3 min-h-18 text-xs leading-5 text-muted-foreground">
-            {item.description || "Belum ada deskripsi produk."}
+        <div
+          className="
+            flex flex-1 flex-col
+            rounded-xl
+            bg-muted/40
+            p-3
+          "
+        >
+          <div className="mb-2 flex items-center gap-2">
+            <Sparkles className="h-3.5 w-3.5 text-primary" />
+
+            <span className="text-xs font-medium">About this type</span>
+          </div>
+
+          <p className="line-clamp-3 text-xs leading-5 text-muted-foreground">
+            {item.description || "Belum ada deskripsi untuk product type ini."}
           </p>
         </div>
+
+        {/* Bottom action */}
+        <Link
+          href={`/admin/dashboard/dashboard-product/${item.id}`}
+          className="
+            mt-3 flex items-center justify-between
+            rounded-xl
+            border border-border/60
+            px-3 py-2
+            text-xs font-medium
+            transition-all
+            hover:border-primary/30
+            hover:bg-primary/5
+          "
+        >
+          <span>Lihat produk</span>
+
+          <ArrowUpRight
+            className="
+              h-3.5 w-3.5
+              transition-transform
+              group-hover:translate-x-0.5
+              group-hover:-translate-y-0.5
+            "
+          />
+        </Link>
       </CardContent>
     </Card>
   );
