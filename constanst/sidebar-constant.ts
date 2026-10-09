@@ -12,7 +12,7 @@ export const SIDEBAR_JUICE = {
     { title: "Database Produk", path: "/admin/produk", icon: ShoppingBasket },
     { title: "dashboard", path: "/admin/dashboard", icon: LayoutDashboard },
     { title: "User", path: "/admin/user", icon: User2Icon },
-    { title: "Menu", path: "/admin/Menus", icon: MenuIcon },
+    // { title: "Menu", path: "/admin/Menus", icon: MenuIcon },
   ],
   dashboard: [],
 };
