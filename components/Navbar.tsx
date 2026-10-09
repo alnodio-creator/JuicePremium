@@ -26,7 +26,7 @@ export default function Navbar({ onSearchChange, itemCount = 0 }: NavbarProps) {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
-      className="sticky top-0 z-50 glass-strong border-b border-white/10"
+      className="relative z-40 glass-strong border-b border-white/10"
     >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
